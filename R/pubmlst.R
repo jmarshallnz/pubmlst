@@ -92,8 +92,9 @@ find_matching_profiles <- function(profile) {
         out_seq[i,] <- st
         out_imp[i,] <- c(nrow(newmlst)+10000, 0)
       } else if (length(possibles) == 1) {
+        warning("This routine should only be called on uniques for speed")
         out_seq[i,] <- newmlst[possibles,]
-        out_imp[i,] <- c(possibles, 0)
+        out_imp[i,] <- c(possibles+10000, 0)
       } else {
         stop("Bug - can't possibly have duplicate new_mlst matches")
       }
