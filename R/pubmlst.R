@@ -36,13 +36,13 @@ download_latest_sequences <- function(url = "http://pubmlst.org/data/profiles/ca
 #' pubmlst[matches,]
 find_matching_profiles <- function(profile) {
   # TODO: update this one to be more efficient
-  possibles <- rep(T, nrow(pubmlst_flat))
+  possibles <- rep(T, nrow(.pubmlst_flat))
   for (j in 1:length(profile)) {
     if (!is.na(profile[j])) {
-      possibles <- possibles & pubmlst_flat[,j+1] == profile[j]
+      possibles <- possibles & .pubmlst_flat[,j+1] == profile[j]
     }
   }
-  pubmlst_flat[possibles & !is.na(possibles),1]
+  .pubmlst_flat[possibles & !is.na(possibles),1]
 }
 
 .find_matching_profiles <- function(profile, profiles) {
@@ -86,7 +86,7 @@ find_matching_profiles <- function(profile) {
       }
     } else if (length(possibles) == 1) {
       # found - fill in the gaps from PubMLST
-      out_seq[i,] <- pubmlst_flat[possibles,2:8]
+      out_seq[i,] <- .pubmlst_flat[possibles,2:8]
       out_imp[i,] <- c(possibles, sum(is.na(st)))
     } else {
       # multiple hits -> leave as unimputed
@@ -161,8 +161,8 @@ impute_mlst_in_data <- function(db, cols_mlst = c("ASP", "GLN", "GLT", "GLY", "P
   db[,cols_mlst] <- results[,cols_mlst]
   db$ST          <- results$ST
   db$Imputed     <- results$Imputed
-  db$CC          <- pubmlst_flat[ifelse(results$ST < 10000, results$ST, NA), "CC"]
-  db$Coli        <- pubmlst_flat[ifelse(results$ST < 10000, results$ST, NA), "Coli"]
+  db$CC          <- .pubmlst_flat[ifelse(results$ST < 10000, results$ST, NA), "CC"]
+  db$Coli        <- .pubmlst_flat[ifelse(results$ST < 10000, results$ST, NA), "Coli"]
 
   # return
   db
