@@ -21,6 +21,7 @@ mlst <- download_latest_sequences()
 head(mlst)
 }
 \seealso{
+pubmlst
 \url{http://pubmlst.org}
 }
 

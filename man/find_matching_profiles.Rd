@@ -4,22 +4,19 @@
 \alias{find_matching_profiles}
 \title{Find the matching profiles in the PubMLST Campylobacter jejuni and coli database.}
 \usage{
-find_matching_profiles(profile, pubmlst)
+find_matching_profiles(profile)
 }
 \arguments{
 \item{profile}{the allelic profile}
-
-\item{pubmlst}{the database to match against}
 }
 \value{
 A boolean vector of which rows in pubmlst match
 }
 \description{
-Imputes missing alleles as appropriate.
+Profiles with missing alleles return all matching profiles.
 }
 \examples{
-mlst    <- download_latest_sequences()
-matches <- find_matching_profiles(c(1, 2, 1, 54, NA, 4, 1, 5), mlst)
-head(mlst)
+matches <- find_matching_profiles(c(2, 1, 54, NA, 4, 1, 5))
+pubmlst[matches,]
 }
 
