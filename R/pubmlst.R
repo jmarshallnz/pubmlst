@@ -6,8 +6,9 @@
 #' @seealso pubmlst
 #' \url{http://pubmlst.org}
 #' @examples
-#' mlst <- download_latest_sequences()
-#' head(mlst)
+#' # not run
+#' # mlst <- download_latest_sequences()
+#' # head(mlst)
 download_latest_sequences <- function(url = "http://pubmlst.org/data/profiles/campylobacter.txt") {
 
   mlst <- read.table(url, header=T, sep="\t")

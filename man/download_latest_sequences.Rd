@@ -17,8 +17,9 @@ A data frame of sequence types, their allelic profile, and clonal complex.
 Download the latest PubMLST Campylobacter jejuni and coli sequences.
 }
 \examples{
-mlst <- download_latest_sequences()
-head(mlst)
+# not run
+# mlst <- download_latest_sequences()
+# head(mlst)
 }
 \seealso{
 pubmlst
