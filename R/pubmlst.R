@@ -35,14 +35,27 @@ download_latest_sequences <- function(url = "http://pubmlst.org/data/profiles/ca
 #' matches <- find_matching_profiles(c(2, 1, 54, NA, 4, 1, 5))
 #' pubmlst[matches,]
 find_matching_profiles <- function(profile) {
-  # TODO: update this one to be more efficient
-  possibles <- rep(T, nrow(.pubmlst_flat))
-  for (j in 1:length(profile)) {
+  for (j in seq_along(profile)) {
     if (!is.na(profile[j])) {
-      possibles <- possibles & .pubmlst_flat[,j+1] == profile[j]
+      # out of range
+      if (profile[j] > length(.pubmlst_map[[j]]))
+        return(numeric(0))
+
+      # first allele found
+      possibles <- .pubmlst_map[[ j ]][[ profile[j] ]]
+      for (k in seq_len(length(profile) - j) + j) {
+        if (!is.na(profile[k])) {
+          # out of range
+          if (profile[k] > length(.pubmlst_map[[k]]))
+            return(numeric(0))
+
+          possibles <- intersect(possibles, .pubmlst_map[[k]][[ profile[k] ]])
+        }
+      }
+      return(possibles)
     }
   }
-  .pubmlst_flat[possibles & !is.na(possibles),1]
+  return(1:length(.pubmlst_flat))
 }
 
 .find_matching_profiles <- function(profile, profiles) {
@@ -92,8 +105,6 @@ find_matching_profiles <- function(profile) {
       # multiple hits -> leave as unimputed
       out_seq[i,] <- st
     }
-    if (i %% 100 == 0)
-      cat("done", i, "of", nrow(sequences), "STs\n")
   }
 
   cbind(out_seq, out_imp)

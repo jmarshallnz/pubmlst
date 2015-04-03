@@ -48,4 +48,12 @@ per_row <- per_row %>% left_join(pubmlst) %>% mutate(ST = ifelse(is.na(ASP), NA,
 .pubmlst_flat <- as.matrix(per_row)
 devtools::use_data(.pubmlst_flat, internal=TRUE, overwrite=TRUE)
 
-#TODO: Construct the more efficient version for matching stuff up
+# more efficient again is to use a map
+.pubmlst_map <- list()
+for (i in 1:7) {
+  .pubmlst_map[[i]] <- list()
+  for (j in 1:max(.pubmlst_flat[, i+1], na.rm=T)) {
+    .pubmlst_map[[i]][[j]] <- which(.pubmlst_flat[, i+1] == j)
+  }
+}
+devtools::use_data(.pubmlst_flat, .pubmlst_map, internal=TRUE, overwrite=TRUE)
