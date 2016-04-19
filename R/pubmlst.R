@@ -1,6 +1,7 @@
 
 #' Download the latest PubMLST Campylobacter jejuni and coli sequences.
 #' 
+#' @export
 #' @param url the PubMLST URL to use.
 #' @return A data frame of sequence types, their allelic profile, and clonal complex.
 #' @seealso pubmlst
@@ -29,6 +30,7 @@ download_latest_sequences <- function(url = "http://pubmlst.org/data/profiles/ca
 #' 
 #' Profiles with missing alleles return all matching profiles.
 #' 
+#' @export
 #' @param profile the allelic profile
 #' @return A boolean vector of which rows in pubmlst match
 #' @examples
@@ -115,6 +117,7 @@ find_matching_profiles <- function(profile) {
 #' 
 #' Imputes missing alleles if there is a unique match in PubMLST.
 #' 
+#' @export
 #' @param mlst the allelic profiles to match as a numeric matrix or data.frame of 7 columns.
 #' @return A data frame of 9 columns, representing the imputed profile, the ST and the number of imputed alleles.
 #' @examples
@@ -146,6 +149,7 @@ impute_sequences <- function(mlst) {
 #' 
 #' Alleles marked as "NEW" are interpreted as new alleles, and given a large allele number.
 #' 
+#' @export
 #' @param db the database or data.frame.
 #' @param cols_mlst the columns in the data representing the seven loci.
 #' @return db, with additional columns ST, CC, and Coli, where cols_mlst have been imputed.
