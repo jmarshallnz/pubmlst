@@ -1,7 +1,7 @@
 Package: pubmlst
 Type: Package
 Title: Infer Sequence Types Based On Allelic Profiles
-Version: 0.1
+Version: 0.2
 Date: 2015-04-02
 Authors@R: person("Jonathan", "Marshall", email = "J.C.Marshall@massey.ac.nz",
     role = c("aut", "cre"))
