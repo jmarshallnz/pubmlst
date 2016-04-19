@@ -2,12 +2,17 @@ library(dplyr)
 library(reshape2)
 
 # load in mlst profile data
-profiles_file <- "profiles_20150403.txt"
+profiles_file <- "data-raw/profiles_20160419.txt"
 #profiles_file <- "http://pubmlst.org/data/profiles/campylobacter.txt"
-profiles <- read.table(profiles_file, header=T, sep="\t")
+profiles <- read.table(profiles_file, header=T, sep=" ")
 
 # load in raw isolate data and sum up to determine coli status
-isolates_file <- "isolates_20150219.txt"
+# the isolates file can be downloaded from:
+# http://pubmlst.org/perl/bigsdb/bigsdb.pl?page=plugin&name=Export&db=pubmlst_campylobacter_isolates
+# where you select:
+# id, isolate, source, species, MLST scheme
+# deselect include all fields (we don't need ST and CC)
+isolates_file <- "data-raw/isolates_20160419.txt"
 isolates <- read.table(isolates_file, header=T, sep="\t", comment.char="")
 
 cols_iso <- c("aspA", "glnA", "gltA", "glyA", "pgm", "tkt", "uncA")
@@ -16,6 +21,7 @@ for (i in cols_iso)
   isolates[,i] <- suppressWarnings(as.numeric(as.character(isolates[,i])))
 
 # cleanup the species name column
+isolates$species <- factor(isolates$species)
 levels(isolates$species) <- gsub("Campylobacter (.*)", "\\1", levels(isolates$species))
 levels(isolates$species) <- gsub(" ", ".", levels(isolates$species))
 
@@ -46,7 +52,7 @@ devtools::use_data(pubmlst, overwrite=TRUE)
 per_row <- data.frame(ST=1:max(profiles$ST))
 per_row <- per_row %>% left_join(pubmlst) %>% mutate(ST = ifelse(is.na(ASP), NA, ST))
 .pubmlst_flat <- as.matrix(per_row)
-devtools::use_data(.pubmlst_flat, internal=TRUE, overwrite=TRUE)
+#devtools::use_data(.pubmlst_flat, internal=TRUE, overwrite=TRUE)
 
 # more efficient again is to use a map
 .pubmlst_map <- list()

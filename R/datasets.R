@@ -3,7 +3,7 @@
 #' A dataset containing the sequence type number, 7 allele numbers at the housekeeping genes,
 #' the clonal-complex number (if available) and whether the strain is like C.coli.
 #'
-#' @format A data frame with 41392 rows and 4 variables:
+#' @format A data frame with 8160 rows and 10 variables:
 #' \describe{
 #'   \item{ST}{Sequence type}
 #'   \item{ASP}{aspA allele}
@@ -16,5 +16,5 @@
 #'   \item{CC}{Clonal complex}
 #'   \item{Coli}{TRUE if more isolates have been submitted to PubMLST as C.coli, NA if unknown.}
 #' }
-#' @source \url{http://www.stats.govt.nz/Census/2006CensusHomePage/MeshblockDataset.aspx}
+#' @source \url{http://pubmlst.org}
 "pubmlst"
