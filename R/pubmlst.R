@@ -1,3 +1,5 @@
+#' @importFrom utils read.table
+NULL
 
 #' Download the latest PubMLST Campylobacter jejuni and coli sequences.
 #' 
