@@ -28,4 +28,3 @@ A dataset containing the sequence type number, 7 allele numbers at the housekeep
 the clonal-complex number (if available) and whether the strain is like C.coli.
 }
 \keyword{datasets}
-

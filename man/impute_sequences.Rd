@@ -20,4 +20,3 @@ profiles <- matrix(c(2, 1, 54, NA, 4, 1,  5,
                      2, 4,  1,  2, 2, 1, NA), nrow=2, byrow=TRUE)
 impute_sequences(profiles)
 }
-

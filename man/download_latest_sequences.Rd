@@ -25,4 +25,3 @@ Download the latest PubMLST Campylobacter jejuni and coli sequences.
 pubmlst
 \url{http://pubmlst.org}
 }
-

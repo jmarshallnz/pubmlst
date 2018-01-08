@@ -19,4 +19,3 @@ Profiles with missing alleles return all matching profiles.
 matches <- find_matching_profiles(c(2, 1, 54, NA, 4, 1, 5))
 pubmlst[matches,]
 }
-
