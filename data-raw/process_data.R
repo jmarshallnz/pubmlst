@@ -2,9 +2,10 @@ library(dplyr)
 library(reshape2)
 
 # load in mlst profile data
-profiles_file <- "data-raw/profiles_20160419.txt"
 #profiles_file <- "http://pubmlst.org/data/profiles/campylobacter.txt"
-profiles <- read.table(profiles_file, header=T, sep=" ")
+#write.table(profiles, "data-raw/profiles_20180109.txt", row.names=FALSE, sep="\t")
+profiles_file <- "data-raw/profiles_20180109.txt"
+profiles <- read.table(profiles_file, header=TRUE, sep="\t")
 
 # load in raw isolate data and sum up to determine coli status
 # the isolates file can be downloaded from:
@@ -12,7 +13,7 @@ profiles <- read.table(profiles_file, header=T, sep=" ")
 # where you select:
 # id, isolate, source, species, MLST scheme
 # deselect include all fields (we don't need ST and CC)
-isolates_file <- "data-raw/isolates_20160419.txt"
+isolates_file <- "data-raw/isolates_20180109.txt"
 isolates <- read.table(isolates_file, header=T, sep="\t", comment.char="")
 
 cols_iso <- c("aspA", "glnA", "gltA", "glyA", "pgm", "tkt", "uncA")
