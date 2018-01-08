@@ -161,7 +161,7 @@ impute_mlst_in_data <- function(db, cols_mlst = c("ASP", "GLN", "GLT", "GLY", "P
 
   # Convert "NEW" to a special value
   for (i in cols_mlst) {
-    newbies <- db[,i] == "NEW"
+    newbies <- toupper(db[,i]) == "NEW"
     if (sum(newbies, na.rm=T) > 0)
       db[newbies,i] <- 1000 - 1:sum(newbies)
   }
