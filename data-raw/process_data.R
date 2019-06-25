@@ -49,7 +49,7 @@ profiles$clonal_complex <- NULL
 
 # grab the columns we want
 pubmlst <- profiles %>% select(ST, ASP=aspA, GLN=glnA, GLT=gltA, GLY=glyA, PGM=pgm, TKT=tkt, UNC=uncA, CC, Coli)
-devtools::use_data(pubmlst, overwrite=TRUE) 
+usethis::use_data(pubmlst, overwrite=TRUE)
 
 # map the ST to row number by adding empty rows (more efficient)
 per_row <- data.frame(ST=1:max(profiles$ST))
@@ -65,4 +65,4 @@ for (i in 1:7) {
     .pubmlst_map[[i]][[j]] <- which(.pubmlst_flat[, i+1] == j)
   }
 }
-devtools::use_data(.pubmlst_flat, .pubmlst_map, internal=TRUE, overwrite=TRUE)
+usethis::use_data(.pubmlst_flat, .pubmlst_map, internal=TRUE, overwrite=TRUE)
