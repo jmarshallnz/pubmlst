@@ -1,5 +1,5 @@
 library(dplyr)
-library(reshape2)
+library(tidyr)
 
 # load in mlst profile data
 date_ran <- "20190625"
@@ -35,10 +35,7 @@ levels(isolates$species) <- gsub(" ", ".", levels(isolates$species))
 joined <- profiles %>% left_join(isolates)
 
 # aggregate up by reshaping
-types <- joined %>% mutate(value=1) %>% dcast(ST ~ species, sum)
-
-# drop the useless "NA" type
-types <- types %>% mutate("NA"=NULL)
+types <- joined %>% filter(!is.na(species)) %>% group_by(ST, species) %>% summarise(Count = n()) %>% tidyr::spread(species, Count, fill=0)
 
 # and join back to the original database
 profiles <- profiles %>% inner_join(types)
