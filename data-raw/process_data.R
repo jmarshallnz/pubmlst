@@ -2,24 +2,24 @@ library(dplyr)
 library(tidyr)
 
 # load in mlst profile data
-date_ran <- "20190625"
+date_ran <- "20201103"
 
 profiles_file <- file.path("data-raw", paste0("profiles_", date_ran, ".txt"))
 if (0) {
-  source_file <- "http://pubmlst.org/data/profiles/campylobacter.txt"
-  profiles <- read.table(source_file, header=TRUE, sep="\t")
+  source_url <- "https://pubmlst.org/bigsdb?db=pubmlst_campylobacter_seqdef&page=downloadProfiles&scheme_id=1"
+  profiles <- read.table(source_url, header=TRUE, sep="\t")
   write.table(profiles, profiles_file, row.names=FALSE, sep="\t")
 }
 profiles <- read.table(profiles_file, header=TRUE, sep="\t")
 
 # load in raw isolate data and sum up to determine coli status
 # the isolates file can be downloaded from:
-# http://pubmlst.org/perl/bigsdb/bigsdb.pl?page=plugin&name=Export&db=pubmlst_campylobacter_isolates
+# https://pubmlst.org/bigsdb?db=pubmlst_campylobacter_isolates&page=plugin&name=Export
 # where you select:
 # id, isolate, source, species and then Typing->MLST scheme
 # deselect include all fields (we don't need ST and CC)
 isolates_file <- file.path("data-raw", paste0("isolates_", date_ran, ".txt"))
-isolates <- read.table(isolates_file, header=T, sep="\t", comment.char="")
+isolates <- read.table(isolates_file, header=T, sep="\t", comment.char="", quote='')
 
 cols_iso <- c("aspA", "glnA", "gltA", "glyA", "pgm", "tkt", "uncA")
 
