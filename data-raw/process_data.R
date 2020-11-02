@@ -38,7 +38,7 @@ joined <- profiles %>% left_join(isolates)
 types <- joined %>% filter(!is.na(species)) %>% group_by(ST, species) %>% summarise(Count = n()) %>% tidyr::spread(species, Count, fill=0)
 
 # and join back to the original database
-profiles <- profiles %>% inner_join(types)
+profiles <- profiles %>% left_join(types)
 profiles <- profiles %>% mutate(Coli = ifelse(coli + jejuni == 0, NA, coli > jejuni))
 
 # cleanup the clonal complex
